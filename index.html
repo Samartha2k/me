@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Samarth Agrawal Photography Gallery</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Fade in content */
+    #main-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #main-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    html, body {
+      margin: 0; padding: 0; font-family: sans-serif; background: #fff;
+    }
+    h1 {
+      font-family: 'Bitcount Single', monospace, sans-serif;
+      font-size: 8vw;
+      font-weight: 400;
+      margin: 36px 0 15px;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    h2 {
+      font-family: 'Montserrat', Arial, Helvetica, 'Trebuchet MS', Tahoma, sans-serif;
+      font-size: 2em;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-align: center;
+      margin: 10px 0 36px;
+    }
+
+    .masonry {
+      column-count: 4;
+      column-gap: 16px;
+      max-width: 1300px;
+      margin: 0 auto 40px;
+      padding: 0 12px;
+    }
+    @media (max-width: 1100px) { .masonry { column-count: 3; } }
+    @media (max-width: 750px) { .masonry { column-count: 2; } }
+    @media (max-width: 500px) {
+      .masonry { column-count: 1; padding: 0 8px 30px; }
+      h1 { font-size: 3em; }
+      h2 { font-size: 1.1em; }
+    }
+    .masonry a {
+      display: inline-block;
+      width: 100%;
+      margin: 0 0 16px;
+      break-inside: avoid;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+      overflow: hidden;
+      background: #f6f6f6;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .masonry a:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+      z-index: 1;
+    }
+    .masonry img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0;
+      object-fit: cover;
+      vertical-align: middle;
+    }
+
+    /* Lightbox styling without overlay background */
+.lightbox {
+  position: fixed;
+  inset: 0;               /* top:0; right:0; bottom:0; left:0; shorthand */
+  background-color: rgba(0, 0, 0, 0.5); /* translucent black */
+  display: none;          /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.lightbox:target {
+  display: flex;          /* show as flex when targeted */
+}
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 6px 40px rgba(255, 255, 255, 0.3);
+      display: block;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.5); /* translucent black */
+}
+    /* Close button */
+    .lightbox a.close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 2.2rem;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 1500;
+      cursor: pointer;
+      user-select: none;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .lightbox a.close:hover { opacity: 1; }
+    /* Navigation arrows */
+    .lightbox a.nav {
+      position: fixed;
+      top: 50%;
+      font-size: 1.6rem;
+      color: black;
+      text-decoration: none;
+      background: transparent !important;
+      border-radius: 0;
+      padding: 5px 12px;
+      cursor: pointer;
+      user-select: none;
+      transform: translateY(-50%);
+      z-index: 1400;
+      box-shadow: none !important;
+      transition: none;
+    }
+    .lightbox a.nav:hover {
+      color: #555;
+    }
+    .lightbox a.prev { left: 20px; }
+    .lightbox a.next { right: 20px; }
+  </style>
+</head>
+<body>
+
+  <div id="main-content" class="content-hidden">
+    <h1>SAMARTH AGRAWAL</h1>
+    <h2>PHOTOGRAPHY</h2>
+
+    <div class="masonry">
+      <a href="#img1"><img src="https://images.unsplash.com/photo-1752759596125-f3b2f0e8399f?q=80&w=1200&auto=format&fit=crop" alt="Photo 1"></a>
+      <a href="#img2"><img src="https://images.unsplash.com/photo-1749774245020-f6b6745a2d31?q=80&w=1200&auto=format&fit=crop" alt="Photo 2"></a>
+      <a href="#img3"><img src="https://images.unsplash.com/photo-1749773764660-10ac33731d14?q=80&w=1200&auto=format&fit=crop" alt="Photo 3"></a>
+      <a href="#img4"><img src="https://images.unsplash.com/photo-1754118658911-b866fa660f76?q=80&w=1200&auto=format&fit=crop" alt="Photo 4"></a>
+      <a href="#img5"><img src="https://images.unsplash.com/photo-1755799415138-72356191cf3c?q=80&w=1200&auto=format&fit=crop" alt="Photo 5"></a>
+      <a href="#img6"><img src="https://images.unsplash.com/photo-1752759595513-5afc0c33c137?q=80&w=1200&auto=format&fit=crop" alt="Photo 6"></a>
+      <a href="#img7"><img src="https://images.unsplash.com/photo-1749774245744-fe1152652d4c?q=80&w=1200&auto=format&fit=crop" alt="Photo 7"></a>
+      <a href="#img8"><img src="https://images.unsplash.com/photo-1749774246064-1c27dd0b0bb5?q=80&w=1200&auto=format&fit=crop" alt="Photo 8"></a>
+      <a href="#img9"><img src="https://images.unsplash.com/photo-1755189584673-42b0b337c138?q=80&w=1200&auto=format&fit=crop" alt="Photo 9"></a>
+      <a href="#img10"><img src="https://images.pexels.com/photos/33580951/pexels-photo-33580951.jpeg?_gl=1*1h1vog1*_ga*MTU0MTIwNzU1OC4xNzU1OTY5NTI3*_ga_8JE65Q40S6*czE3NTU5Njk1MjckbzEkZzEkdDE3NTU5Njk2NDckajUyJGwwJGgw" alt="Photo 10"></a>
+    </div>
+  </div>
+
+  <!-- Lightbox sections without overlay background -->
+  <div id="img1" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img10" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1752759596125-f3b2f0e8399f?q=80&w=1974&auto=format&fit=crop" alt="Photo 1" />
+    <a href="#img2" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img2" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img1" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1749774245020-f6b6745a2d31?q=80&w=1935&auto=format&fit=crop" alt="Photo 2" />
+    <a href="#img3" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img3" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img2" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1749773764660-10ac33731d14?q=80&w=1935&auto=format&fit=crop" alt="Photo 3" />
+    <a href="#img4" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img4" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img3" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1754118658911-b866fa660f76?q=80&w=1935&auto=format&fit=crop" alt="Photo 4" />
+    <a href="#img5" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img5" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img4" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1755799415138-72356191cf3c?q=80&w=1974&auto=format&fit=crop" alt="Photo 5" />
+    <a href="#img6" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img6" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img5" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1752759595513-5afc0c33c137?q=80&w=1974&auto=format&fit=crop" alt="Photo 6" />
+    <a href="#img7" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img7" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img6" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1749774245744-fe1152652d4c?q=80&w=1935&auto=format&fit=crop" alt="Photo 7" />
+    <a href="#img8" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img8" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img7" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1749774246064-1c27dd0b0bb5?q=80&w=1935&auto=format&fit=crop" alt="Photo 8" />
+    <a href="#img9" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img9" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img8" class="nav prev">&#10094;</a>
+    <img src="https://images.unsplash.com/photo-1755189584673-42b0b337c138?q=80&w=1935&auto=format&fit=crop" alt="Photo 9" />
+    <a href="#img10" class="nav next">&#10095;</a>
+  </div>
+
+  <div id="img10" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <a href="#img9" class="nav prev">&#10094;</a>
+    <img src="https://images.pexels.com/photos/33580951/pexels-photo-33580951.jpeg?_gl=1*1h1vog1*_ga*MTU0MTIwNzU1OC4xNzU1OTY5NTI3*_ga_8JE65Q40S6*czE3NTU5Njk1MjckbzEkZzEkdDE3NTU5Njk2NDckajUyJGwwJGgw" alt="Photo 10" />
+    <a href="#img1" class="nav next">&#10095;</a>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const mainContent = document.getElementById('main-content');
+      mainContent.classList.add('visible');
+    });
+  </script>
+
+</body>
+</html>
