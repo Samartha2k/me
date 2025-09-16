@@ -14,27 +14,28 @@
       box-sizing: border-box;
       opacity: 0;
       animation: fadeIn 1.8s ease forwards;
+      color: #ddd;
     }
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-#hero-section {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  background: #222;
-}
-.scrolling-text-wrapper {
-  position: absolute;
-  top: 33%;
-  left: 0;
-  width: 100vw;
-  overflow: hidden;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 1;
-}
+    #hero-section {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background: #222;
+    }
+    .scrolling-text-wrapper {
+      position: absolute;
+      top: 33%;
+      left: 0;
+      width: 100vw;
+      overflow: hidden;
+      transform: translateY(-50%);
+      pointer-events: none;
+      z-index: 1;
+    }
     .scrolling-text h1 {
       font-family: 'Bitcount Single', monospace, sans-serif;
       font-size: 15vw;
@@ -50,20 +51,20 @@
     }
     @keyframes scroll-left {
       0% { transform: translateX(0%); }
-      100% { transform: translateX(-100%); }
+      100% { transform: translateX(-100%);}
     }
-.face-glow-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 550px;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
+    .face-glow-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 550px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
     .black-glow {
       position: absolute;
       top: 0; left: 0;
@@ -83,15 +84,14 @@
       display: block;
       z-index: 2;
     }
-@media (max-width: 500px) {
-  .scrolling-text h1 {
-    font-size: 35vw;
-  }
-  .face-glow-wrapper {
-    width: 500px;
-  }
-}
-
+    @media (max-width: 500px) {
+      .scrolling-text h1 {
+        font-size: 35vw;
+      }
+      .face-glow-wrapper {
+        width: 500px;
+      }
+    }
     /* Photography Section */
     #photography-section {
       width: 100vw;
@@ -99,16 +99,17 @@
       margin: 0;
       padding: 50px 0 32px 0;
       text-align: center;
+      color: #222;
     }
     #photography-section h2 {
       font-family: 'Montserrat', Arial, Helvetica, 'Trebuchet MS', Tahoma, sans-serif;
       font-size: 2em;
       font-weight: 300;
       letter-spacing: 0.15em;
-      color: #222;
       margin: 0;
       user-select: none;
       display: inline-block;
+      color: #222;
     }
     /* Gallery styles */
     #main-content {
@@ -213,9 +214,101 @@
     .lightbox a.prev { left: 20px; }
     .lightbox a.next { right: 20px; }
     html, body {
-  overflow-x: hidden;
-}
+      overflow-x: hidden;
+    }
 
+    /* Contact Me Section styles */
+    #contact-me-section {
+      background: #222;
+      color: #ddd;
+      font-family: 'Montserrat', Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto 80px auto;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    #contact-me-section h2 {
+      font-family: 'Bitcount Single', monospace, sans-serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      margin: 0 0 15px 0;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #eee;
+    }
+    #contact-me-section p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: #bbb;
+      user-select: none;
+    }
+
+    /* Reuse your icon button styles inside contact me */
+    #contact-me-section .btn-container {
+      justify-content: center;
+      gap: 20px;
+    }
+    #contact-me-section a.button, #contact-me-section button.button {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      font-size: 0;
+      background: #444;
+      border: 2px solid #fff;
+      color: #ddd;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px #000 inset;
+      filter: grayscale(100%);
+    }
+    #contact-me-section a.button:hover, #contact-me-section button.button:hover {
+      filter: grayscale(0%);
+      background: #666;
+      box-shadow:
+        0 0 8px #bbb,
+        0 0 20px #eee;
+      transform: scale(1.1);
+    }
+    #contact-me-section svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+      filter: grayscale(100%);
+      transition: fill 0.3s ease, transform 0.3s ease;
+    }
+    #contact-me-section a.button:hover svg, #contact-me-section button.button:hover svg {
+      fill: #fff;
+      transform: rotate(15deg) scale(1.2);
+      filter: grayscale(0%);
+    }
+    #contact-me-section .tooltip-text {
+      bottom: 65px;
+      font-size: 14px;
+      padding: 6px 10px;
+      background-color: #444;
+      color: #eee;
+      border-radius: 6px;
+      box-shadow: 0 0 5px #000 inset, 0 0 15px #444;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    #contact-me-section .tooltip-text::after {
+      border-color: #444 transparent transparent transparent;
+    }
+    #contact-me-section .copied-message {
+      top: -31px;
+      font-size: 14px;
+      padding: 6px 10px;
+      background-color: #444;
+      color: #eee;
+      border-radius: 6px;
+      box-shadow: 0 0 5px #000 inset, 0 0 15px #444;
+      white-space: nowrap;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -230,95 +323,308 @@
     <img src="damn.webp" alt="Photograph" class="face-image" />
   </div>
 </section>
+<!-- Photography Section -->
+<section id="photography-section">
+  <h2>PHOTOGRAPHY</h2>
+</section>
+<!-- Gallery Section -->
+<div id="main-content">
+  <div class="masonry">
+    <a href="#img1"><img src="https://images.unsplash.com/photo-1752759596125-f3b2f0e8399f?q=80&w=1200&auto=format&fit=crop" alt="Photo 1"></a>
+    <a href="#img2"><img src="https://images.unsplash.com/photo-1749774245020-f6b6745a2d31?q=80&w=1200&auto=format&fit=crop" alt="Photo 2"></a>
+    <a href="#img3"><img src="https://images.unsplash.com/photo-1749773764660-10ac33731d14?q=80&w=1200&auto=format&fit=crop" alt="Photo 3"></a>
+    <a href="#img4"><img src="https://images.unsplash.com/photo-1754118658911-b866fa660f76?q=80&w=1200&auto=format&fit=crop" alt="Photo 4"></a>
+    <a href="#img5"><img src="https://images.unsplash.com/photo-1755799415138-72356191cf3c?q=80&w=1200&auto=format&fit=crop" alt="Photo 5"></a>
+    <a href="#img6"><img src="https://images.unsplash.com/photo-1752759595513-5afc0c33c137?q=80&w=1200&auto=format&fit=crop" alt="Photo 6"></a>
+    <a href="#img7"><img src="https://images.unsplash.com/photo-1749774245744-fe1152652d4c?q=80&w=1200&auto=format&fit=crop" alt="Photo 7"></a>
+    <a href="#img8"><img src="https://images.unsplash.com/photo-1749774246064-1c27dd0b0bb5?q=80&w=1200&auto=format&fit=crop" alt="Photo 8"></a>
+    <a href="#img9"><img src="https://images.unsplash.com/photo-1755189584673-42b0b337c138?q=80&w=1200&auto=format&fit=crop" alt="Photo 9"></a>
+    <a href="#img10"><img src="https://images.pexels.com/photos/33580951/pexels-photo-33580951.jpeg" alt="Photo 10"></a>
+    <a href="#img11"><img src="https://images.pexels.com/photos/33614788/pexels-photo-33614788.jpeg" alt="Photo 11"></a>
+  </div>
+</div>
+<!-- Lightbox previews -->
+<div id="img1" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img11" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1752759596125-f3b2f0e8399f?q=80&w=1200&auto=format&fit=crop" alt="Photo 1" />
+  <a href="#img2" class="nav next">❯</a>
+</div>
+<div id="img2" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img1" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1749774245020-f6b6745a2d31?q=80&w=1200&auto=format&fit=crop" alt="Photo 2" />
+  <a href="#img3" class="nav next">❯</a>
+</div>
+<div id="img3" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img2" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1749773764660-10ac33731d14?q=80&w=1200&auto=format&fit=crop" alt="Photo 3" />
+  <a href="#img4" class="nav next">❯</a>
+</div>
+<div id="img4" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img3" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1754118658911-b866fa660f76?q=80&w=1200&auto=format&fit=crop" alt="Photo 4" />
+  <a href="#img5" class="nav next">❯</a>
+</div>
+<div id="img5" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img4" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1755799415138-72356191cf3c?q=80&w=1200&auto=format&fit=crop" alt="Photo 5" />
+  <a href="#img6" class="nav next">❯</a>
+</div>
+<div id="img6" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img5" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1752759595513-5afc0c33c137?q=80&w=1200&auto=format&fit=crop" alt="Photo 6" />
+  <a href="#img7" class="nav next">❯</a>
+</div>
+<div id="img7" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img6" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1749774245744-fe1152652d4c?q=80&w=1200&auto=format&fit=crop" alt="Photo 7" />
+  <a href="#img8" class="nav next">❯</a>
+</div>
+<div id="img8" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img7" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1749774246064-1c27dd0b0bb5?q=80&w=1200&auto=format&fit=crop" alt="Photo 8" />
+  <a href="#img9" class="nav next">❯</a>
+</div>
+<div id="img9" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img8" class="nav prev">❮</a>
+  <img src="https://images.unsplash.com/photo-1755189584673-42b0b337c138?q=80&w=1200&auto=format&fit=crop" alt="Photo 9" />
+  <a href="#img10" class="nav next">❯</a>
+</div>
+<div id="img10" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img9" class="nav prev">❮</a>
+  <img src="https://images.pexels.com/photos/33580951/pexels-photo-33580951.jpeg" alt="Photo 10" />
+  <a href="#img11" class="nav next">❯</a>
+</div>
+<div id="img11" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#img10" class="nav prev">❮</a>
+  <img src="https://images.pexels.com/photos/33614788/pexels-photo-33614788.jpeg" alt="Photo 11" />
+  <a href="#img1" class="nav next">❯</a>
+</div>
 
-  <!-- Photography Section -->
-  <section id="photography-section">
-    <h2>PHOTOGRAPHY</h2>
-  </section>
+<!-- Contact Me Section -->
 
-  <!-- Gallery Section -->
-  <div id="main-content">
-    <div class="masonry">
-      <a href="#img1"><img src="https://images.unsplash.com/photo-1752759596125-f3b2f0e8399f?q=80&w=1200&auto=format&fit=crop" alt="Photo 1"></a>
-      <a href="#img2"><img src="https://images.unsplash.com/photo-1749774245020-f6b6745a2d31?q=80&w=1200&auto=format&fit=crop" alt="Photo 2"></a>
-      <a href="#img3"><img src="https://images.unsplash.com/photo-1749773764660-10ac33731d14?q=80&w=1200&auto=format&fit=crop" alt="Photo 3"></a>
-      <a href="#img4"><img src="https://images.unsplash.com/photo-1754118658911-b866fa660f76?q=80&w=1200&auto=format&fit=crop" alt="Photo 4"></a>
-      <a href="#img5"><img src="https://images.unsplash.com/photo-1755799415138-72356191cf3c?q=80&w=1200&auto=format&fit=crop" alt="Photo 5"></a>
-      <a href="#img6"><img src="https://images.unsplash.com/photo-1752759595513-5afc0c33c137?q=80&w=1200&auto=format&fit=crop" alt="Photo 6"></a>
-      <a href="#img7"><img src="https://images.unsplash.com/photo-1749774245744-fe1152652d4c?q=80&w=1200&auto=format&fit=crop" alt="Photo 7"></a>
-      <a href="#img8"><img src="https://images.unsplash.com/photo-1749774246064-1c27dd0b0bb5?q=80&w=1200&auto=format&fit=crop" alt="Photo 8"></a>
-      <a href="#img9"><img src="https://images.unsplash.com/photo-1755189584673-42b0b337c138?q=80&w=1200&auto=format&fit=crop" alt="Photo 9"></a>
-      <a href="#img10"><img src="https://images.pexels.com/photos/33580951/pexels-photo-33580951.jpeg" alt="Photo 10"></a>
-      <a href="#img11"><img src="https://images.pexels.com/photos/33614788/pexels-photo-33614788.jpeg" alt="Photo 11"></a>
-    </div>
-  </div>
 
-  <!-- Lightbox previews -->
-  <div id="img1" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img11" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1752759596125-f3b2f0e8399f?q=80&w=1200&auto=format&fit=crop" alt="Photo 1" />
-    <a href="#img2" class="nav next">❯</a>
+<section id="contact-me-section" aria-label="Contact Me Section">
+  <h2>CONTACT ME</h2>
+  <p>Feel free to reach out through these platforms or copy my contact details with one click.</p>
+  <div class="btn-container" style="margin-top:32px;">
+    <!-- LinkedIn -->
+    <a class="button" href="https://www.linkedin.com/in/samarth-agrawal-076681259/" target="_blank" aria-label="LinkedIn">
+      <svg height="24" width="24" viewBox="0 0 382 382" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889
+        C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056
+        H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806
+        c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1
+        s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73
+        c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079
+        c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426
+        c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472
+        L341.91,330.654L341.91,330.654z"/>
+      </svg>
+    </a>
+    <!-- Unsplash -->
+    <a class="button" href="https://unsplash.com/@samarth_a2k" target="_blank" aria-label="Unsplash">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M15 4.5H9V8.5H15V4.5Z" fill="currentColor"/>
+        <path d="M4 10.5H9V14.5H15V10.5H20V19.5H4V10.5Z" fill="currentColor"/>
+      </svg>
+    </a>
+    <!-- GitHub -->
+    <a class="button" href="https://github.com/Samartha2k" target="_blank" aria-label="GitHub">
+      <svg width="24" height="24" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor">
+        <path d="M10 0C4.5 0 0 4.5 0 10c0 4.4 3 8.1 7.2 9.4.5.1.7-.2.7-.5v-1.9c-2.9.6-3.5-1.4-3.5-1.4-.5-1.3-1.1-1.6-1.1-1.6-.9-.7.1-.7.1-.7 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.6.4-1.1.7-1.3-2.3-.2-4.7-1.2-4.7-5.3 0-1.2.4-2.3 1-3.2 0-.2-.4-1 .1-2.2 0 0 .8-.3 2.5 1a8.5 8.5 0 0 1 4.5 0c1.7-1.3 2.5-1 2.5-1 .5 1.2.2 2 .1 2.2.6.9 1 2 1 3.2 0 4.1-2.4 5.1-4.7 5.3.4.3.7.8.7 1.6v2.3c0 .3.2.6.8.5A10 10 0 0 0 20 10c0-5.5-4.5-10-10-10z"/>
+      </svg>
+    </a>
+    <!-- Phone (Button!) -->
+    <button class="button" aria-label="Phone Number" type="button" id="phone-btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.19a1 1 0 011.06-.27 11.36 11.36 0 003.55.57 1 1 0 011 1V20a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.27 1.06l-2.18 2.18z"/></svg>
+      <span class="tooltip-text">+91 9998849046</span>
+      <span class="copied-message">Copied!</span>
+    </button>
+    <!-- Email -->
+    <button class="button" aria-label="Email Address" type="button" id="email-btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5-8-5h16zm0 12H4v-8l8 5 8-5v8z"/></svg>
+      <span class="tooltip-text">samarth.shrutikadpsv@gmail.com</span>
+      <span class="copied-message">Copied!</span>
+    </button>
   </div>
-  <div id="img2" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img1" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1749774245020-f6b6745a2d31?q=80&w=1200&auto=format&fit=crop" alt="Photo 2" />
-    <a href="#img3" class="nav next">❯</a>
-  </div>
-  <div id="img3" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img2" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1749773764660-10ac33731d14?q=80&w=1200&auto=format&fit=crop" alt="Photo 3" />
-    <a href="#img4" class="nav next">❯</a>
-  </div>
-  <div id="img4" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img3" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1754118658911-b866fa660f76?q=80&w=1200&auto=format&fit=crop" alt="Photo 4" />
-    <a href="#img5" class="nav next">❯</a>
-  </div>
-  <div id="img5" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img4" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1755799415138-72356191cf3c?q=80&w=1200&auto=format&fit=crop" alt="Photo 5" />
-    <a href="#img6" class="nav next">❯</a>
-  </div>
-  <div id="img6" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img5" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1752759595513-5afc0c33c137?q=80&w=1200&auto=format&fit=crop" alt="Photo 6" />
-    <a href="#img7" class="nav next">❯</a>
-  </div>
-  <div id="img7" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img6" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1749774245744-fe1152652d4c?q=80&w=1200&auto=format&fit=crop" alt="Photo 7" />
-    <a href="#img8" class="nav next">❯</a>
-  </div>
-  <div id="img8" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img7" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1749774246064-1c27dd0b0bb5?q=80&w=1200&auto=format&fit=crop" alt="Photo 8" />
-    <a href="#img9" class="nav next">❯</a>
-  </div>
-  <div id="img9" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img8" class="nav prev">❮</a>
-    <img src="https://images.unsplash.com/photo-1755189584673-42b0b337c138?q=80&w=1200&auto=format&fit=crop" alt="Photo 9" />
-    <a href="#img10" class="nav next">❯</a>
-  </div>
-  <div id="img10" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img9" class="nav prev">❮</a>
-    <img src="https://images.pexels.com/photos/33580951/pexels-photo-33580951.jpeg" alt="Photo 10" />
-    <a href="#img11" class="nav next">❯</a>
-  </div>
-  <div id="img11" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <a href="#img10" class="nav prev">❮</a>
-    <img src="https://images.pexels.com/photos/33614788/pexels-photo-33614788.jpeg" alt="Photo 11" />
-    <a href="#img1" class="nav next">❯</a>
-  </div>
-</body>
-</html>
+  <style>
+    #contact-me-section {
+      background: #222;
+      color: #ddd;
+      font-family: 'Montserrat', Arial, sans-serif;
+      max-width: 430px;
+      margin: 50px auto 80px auto;
+      padding: 32px 16px 40px 16px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    #contact-me-section h2 {
+      font-family: 'Bitcount Single', monospace, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin: 0 0 18px 0;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #eee;
+    }
+    #contact-me-section p {
+      font-size: 1.07rem;
+      font-weight: 300;
+      margin-bottom: 34px;
+      color: #bbb;
+      user-select: none;
+    }
+    #contact-me-section .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 20px;
+    }
+#contact-me-section .button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: #444;
+  color: #ddd;
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+  font-size: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+#contact-me-section .button:hover {
+  filter: grayscale(0%);
+  background: #666;
+  /* stronger white shadow on hover */
+  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+    }
+    #contact-me-section svg {
+      width: 27px;
+      height: 27px;
+      fill: currentColor;
+      filter: grayscale(100%);
+      transition: fill 0.3s, transform 0.3s;
+    }
+    #contact-me-section .button:hover svg {
+      fill: #fff;
+      transform: rotate(15deg) scale(1.2);
+      filter: grayscale(0%);
+    }
+    #contact-me-section .tooltip-text {
+      visibility: hidden;
+      opacity: 0;
+      width: max-content;
+      max-width: 220px;
+      background-color: #444;
+      color: #eee;
+      text-align: center;
+      border-radius: 6px;
+      padding: 6px 11px;
+      position: absolute;
+      z-index: 2;
+      bottom: 61px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 5px #000 inset, 0 0 15px #444;
+      font-size: 14px;
+      line-height: 1.3;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+      user-select: text;
+      pointer-events: none;
+    }
+    #contact-me-section .button:hover .tooltip-text,
+    #contact-me-section .button:focus .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #contact-me-section .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: #444 transparent transparent transparent;
+    }
+    #contact-me-section .copied-message {
+      position: absolute;
+      top: -31px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #444;
+      color: #eee;
+      padding: 6px 11px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.3;
+      box-shadow: 0 0 5px #000 inset, 0 0 15px #444;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+      z-index: 10;
+      transition: opacity 0.3s;
+    }
+    #contact-me-section .copied-message.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    @media (max-width: 600px){
+      #contact-me-section { max-width:95vw; padding:16px 1.5vw; }
+      #contact-me-section h2{font-size:1.33rem;}
+      #contact-me-section .button {width:42px; height:42px;}
+      #contact-me-section svg{width:21px;height:21px;}
+      #contact-me-section .tooltip-text, #contact-me-section .copied-message {font-size:13px; padding:7px 9px;}
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const phoneBtn = document.getElementById('phone-btn');
+      const phoneTooltip = phoneBtn.querySelector('.tooltip-text');
+      const phoneCopied = phoneBtn.querySelector('.copied-message');
+      phoneBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        navigator.clipboard.writeText(phoneTooltip.textContent.trim()).then(function(){
+          phoneCopied.classList.add('show');
+          setTimeout(()=>phoneCopied.classList.remove('show'),1200);
+        });
+      });
+      const emailBtn = document.getElementById('email-btn');
+      const emailTooltip = emailBtn.querySelector('.tooltip-text');
+      const emailCopied = emailBtn.querySelector('.copied-message');
+      emailBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        navigator.clipboard.writeText(emailTooltip.textContent.trim()).then(function(){
+          emailCopied.classList.add('show');
+          setTimeout(()=>emailCopied.classList.remove('show'),1200);
+        });
+        setTimeout(function(){
+          window.location.href = "mailto:samarth.shrutikadpsv@gmail.com";
+        },180);
+      });
+    });
+  </script>
+</section>
