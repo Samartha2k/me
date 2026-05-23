@@ -1,0 +1,192 @@
+/* ===========================
+   CONTACT SECTION
+   =========================== */
+
+#contact-me-section {
+  background: #222;
+  color: #ddd;
+  font-family: 'Montserrat', Arial, sans-serif;
+  max-width: 480px;
+  margin: 50px auto 0 auto;
+  padding: 32px 16px 80px 16px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+  text-align: center;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+#contact-me-section h2 {
+  font-family: 'Bitcount Single', 'Courier New', monospace, sans-serif;
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 400;
+  margin: 0 0 18px 0;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #eee;
+}
+
+#contact-me-section p {
+  font-size: 1.07rem;
+  font-weight: 300;
+  margin-bottom: 34px;
+  color: #bbb;
+  user-select: none;
+}
+
+/* Contact Buttons Container */
+#contact-me-section .btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+/* Individual Buttons */
+#contact-me-section .button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  background: #444;
+  color: #ddd;
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+  font-size: 0;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 0 5px #000 inset;
+}
+
+#contact-me-section .button:hover {
+  filter: grayscale(0%);
+  background: #666;
+  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Button SVG Icons */
+#contact-me-section svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  filter: grayscale(100%);
+  transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+#contact-me-section .button:hover svg {
+  fill: #fff;
+  transform: rotate(15deg) scale(1.2);
+  filter: grayscale(0%);
+}
+
+/* Tooltip */
+#contact-me-section .tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  max-width: 220px;
+  background-color: #444;
+  color: #eee;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 11px;
+  position: absolute;
+  z-index: 2;
+  bottom: 61px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px #000 inset, 0 0 15px #444;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition: opacity 0.3s;
+  user-select: text;
+  pointer-events: none;
+}
+
+#contact-me-section .button:hover .tooltip-text,
+#contact-me-section .button:focus .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#contact-me-section .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #444 transparent transparent transparent;
+}
+
+/* Copied Message */
+#contact-me-section .copied-message {
+  position: absolute;
+  top: -31px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #444;
+  color: #eee;
+  padding: 6px 11px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.3;
+  box-shadow: 0 0 5px #000 inset, 0 0 15px #444;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 10;
+  transition: opacity 0.3s;
+}
+
+#contact-me-section .copied-message.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===========================
+   RESPONSIVE OVERRIDES
+   =========================== */
+
+@media (max-width: 600px) {
+  #contact-me-section {
+    max-width: 95vw;
+    padding: 24px 16px 60px 16px;
+    margin-top: 30px;
+  }
+
+  #contact-me-section p {
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+
+  #contact-me-section .button {
+    width: 42px;
+    height: 42px;
+  }
+
+  #contact-me-section svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  #contact-me-section .tooltip-text,
+  #contact-me-section .copied-message {
+    font-size: 13px;
+    padding: 7px 9px;
+  }
+}

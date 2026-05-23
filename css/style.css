@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Main Stylesheet - Portfolio Samarth Agrawal
+   Acts as a hub importing modular stylesheet components.
+   ========================================================================== */
+
+@import 'variables.css';
+@import 'base.css';
+@import 'hero.css';
+@import 'navigation.css';
+@import 'gallery.css';
+@import 'projects.css';
+@import 'awards.css';
+@import 'contact.css';
+@import 'location.css';
