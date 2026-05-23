@@ -1,0 +1,19 @@
+# Scratch / temp dev files
+scratch/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Node (just in case)
+node_modules/
+npm-debug.log*
+
+# Env files
+.env
+.env.local
