@@ -17,6 +17,7 @@ html {
   background: #222;
   overflow-x: hidden !important;
   /* FORCE NO SCROLL */
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -28,8 +29,6 @@ body {
   background: #222;
   font-family: Arial, sans-serif;
   color: #ddd;
-  opacity: 0;
-  animation: fadeIn 1.8s ease forwards;
   overflow-x: hidden !important;
   /* FORCE NO SCROLL */
 
@@ -39,8 +38,18 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+/* ===========================
+   LOADING SCREEN & FADE IN
+   =========================== */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #222;
+  z-index: 2;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+}
+#loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

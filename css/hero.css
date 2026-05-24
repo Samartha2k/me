@@ -25,6 +25,10 @@
   overflow: hidden;
   transform: translateY(-50%);
   pointer-events: none;
+  z-index: 3;
+}
+
+body.loader-finished .scrolling-text-wrapper {
   z-index: 1;
 }
 
@@ -38,6 +42,8 @@
   display: inline-block;
   color: #fff;
   animation: scroll-left 60s linear infinite;
+  animation-play-state: paused;
+  transform: translateX(var(--scroll-start-x, 0px));
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   white-space: nowrap;
 
@@ -47,13 +53,26 @@
   text-rendering: optimizeLegibility;
 }
 
+.scrolling-text h1 .remaining-text {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.loaded .scrolling-text h1 .remaining-text {
+  opacity: 1;
+}
+
+body.loaded .scrolling-text h1 {
+  animation-play-state: running;
+}
+
 @keyframes scroll-left {
   0% {
-    transform: translateX(0%);
+    transform: translateX(var(--scroll-start-x, 0px));
   }
 
   100% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + var(--scroll-start-x, 0px)));
   }
 }
 
@@ -68,8 +87,18 @@
   width: auto;
   /* set via JS once image dimensions are known */
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   overflow: hidden;
+}
+
+body.loaded #parallax-canvas-container {
+  opacity: 1;
+}
+
+body.loader-finished #parallax-canvas-container {
+  z-index: 2;
 }
 
 #parallax-canvas-container canvas {
