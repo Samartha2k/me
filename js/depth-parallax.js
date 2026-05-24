@@ -154,6 +154,7 @@ const PARALLAX = {
         buildMesh();
         animate();
         
+        container.classList.add('ready');
         window.threeReady = true;
         window.dispatchEvent(new Event('three-ready'));
       });
@@ -273,5 +274,6 @@ const PARALLAX = {
     renderer.render(scene, camera);
   }
 
-  document.addEventListener('DOMContentLoaded', init);
+  // Expose init globally so it can be deferred until the loader is ready
+  window.initDepthParallax = init;
 })();

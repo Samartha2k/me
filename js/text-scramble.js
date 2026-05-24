@@ -126,20 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 3. Wait for Three.js WebGL rendering/displacement grid initialization
-    const threeReadyPromise = new Promise((resolve) => {
-      if (window.threeReady) {
-        resolve();
-      } else {
-        window.addEventListener('three-ready', resolve);
-      }
-    });
+    // 3. Safety fallback timeout of 5.5 seconds to prevent getting stuck on extremely slow connections
+    const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 5500));
 
-    // 4. Safety fallback timeout of 3.5 seconds to prevent getting stuck
-    const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 3500));
-
-    // Combine loading promises
-    const assetsReadyPromise = Promise.all([minTimePromise, windowLoadPromise, threeReadyPromise]);
+    // Combine loading promises (no longer blocking on CPU-heavy Three.js mesh building!)
+    const assetsReadyPromise = Promise.all([minTimePromise, windowLoadPromise]);
 
     // Trigger resolution when assets are ready, or upon safety timeout
     Promise.race([assetsReadyPromise, safetyTimeoutPromise]).then(() => {
@@ -159,12 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.removeEventListener('touchmove', preventScroll);
         document.removeEventListener('wheel', preventScroll);
         
-        // Trigger a resize event to ensure Three.js canvas and other layouts calculate coordinates properly
+        // Trigger a resize event to calculate coordinates properly
         window.dispatchEvent(new Event('resize'));
 
         // Wait for 400ms fade transition to complete, then lower z-index of scrolling text
         setTimeout(() => {
           document.body.classList.add('loader-finished');
+          
+          // Initialize Three.js WebGL canvas and build mesh now that loader is fully finished
+          if (typeof window.initDepthParallax === 'function') {
+            window.initDepthParallax();
+          }
         }, 400);
       }, 300);
     });

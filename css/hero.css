@@ -93,7 +93,7 @@ body.loaded .scrolling-text h1 {
   overflow: hidden;
 }
 
-body.loaded #parallax-canvas-container {
+#parallax-canvas-container.ready {
   opacity: 1;
 }
 
