@@ -122,7 +122,7 @@ function initGalleryAnimations() {
   galleryItems.forEach((element, index) => {
     element.classList.add('reveal');
     // Stagger animation transition delay offsets to prevent items animating at identical times
-    const delay = (index % 12) * 10; // cycle delay loops every 12 elements
+    const delay = (index % 12) * 35; // cycle delay loops every 12 elements
     element.style.setProperty('--reveal-delay', `${delay}ms`);
   });
 
@@ -147,6 +147,9 @@ function initGalleryAnimations() {
   // Bind observer to all target photography items
   galleryItems.forEach(element => observer.observe(element));
 }
+
+// Expose globally to trigger after loading screen fade-out
+window.initGalleryAnimations = initGalleryAnimations;
 
 // ==========================================
 // CSS TARGET LIGHTBOX SCROLL PATCH
@@ -225,11 +228,9 @@ function randomizeDefaultTab() {
  * Run core components bootstrap sequencing.
  */
 function init() {
-  randomizeDefaultTab();
   initTabNavigation();
   initPhoneButton();
   initEmailButton();
-  initGalleryAnimations();
   initLightboxClose();
 }
 

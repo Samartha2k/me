@@ -149,6 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof window.initDepthParallax === 'function') {
           window.initDepthParallax();
         }
+
+        // Start scroll reveal animations for gallery images as the screen fades out
+        if (typeof window.initGalleryAnimations === 'function') {
+          window.initGalleryAnimations();
+        }
         
         // Restore scroll locks
         document.body.style.overflow = '';

@@ -237,7 +237,7 @@ const PARALLAX = {
     mesh.position.x = isMobile ? PARALLAX.mobileOffsetX : PARALLAX.offsetX;
     mesh.position.y = isMobile ? PARALLAX.mobileOffsetY : PARALLAX.offsetY;
     
-    // Start the mesh flat and scaled down in Z space, then animate it to full size/depth in loop
+    // Start flat and scaled down on load
     mesh.scale.set(0.9, 0.9, 0.0);
     revealProgress = 0;
     
@@ -270,8 +270,11 @@ const PARALLAX = {
   function animate() {
     requestAnimationFrame(animate);
     if (!mesh) return;
-    
-    // Smooth cubic ease-out reveal animation for 3D depth and scale
+
+    // Linear interpolation for smooth trailing camera behavior
+    mouse.x += (mouse.targetX - mouse.x) * PARALLAX.lerpSpeed;
+    mouse.y += (mouse.targetY - mouse.y) * PARALLAX.lerpSpeed;
+
     if (revealProgress < 1.0) {
       revealProgress += 0.02; // Over ~50 frames (~800ms)
       if (revealProgress > 1.0) revealProgress = 1.0;
@@ -284,10 +287,6 @@ const PARALLAX = {
       // Animate material opacity in WebGL directly (much faster than CSS filters)
       mesh.material.opacity = easeProgress;
     }
-
-    // Linear interpolation for smooth trailing camera behavior
-    mouse.x += (mouse.targetX - mouse.x) * PARALLAX.lerpSpeed;
-    mouse.y += (mouse.targetY - mouse.y) * PARALLAX.lerpSpeed;
 
     // Rotate mesh around axes based on lerped coordinate position
     mesh.rotation.y = mouse.x * PARALLAX.parallaxStrength;
