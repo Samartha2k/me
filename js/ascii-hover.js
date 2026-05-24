@@ -359,13 +359,69 @@ const ASCII_CFG = {
       
       const text = node.nodeValue.trim();
       if (text.length > 0) {
-        liveTextNodes.push({ node, parent });
+        const style = window.getComputedStyle(parent);
+        const isInsideContact = !!parent.closest('#contact-me-section');
+        const isH2 = parent.tagName.toLowerCase() === 'h2';
+        const isTabItem = parent.classList.contains('tab-item');
+        const isActive = parent.classList.contains('active');
+
+        const cachedStyle = {
+          color: style.color,
+          fontSize: style.fontSize,
+          letterSpacing: style.letterSpacing,
+          fontWeight: style.fontWeight,
+          fontFamily: style.fontFamily
+        };
+
+        liveTextNodes.push({
+          node,
+          parent,
+          style: cachedStyle,
+          isInsideContact,
+          isH2,
+          isTabItem,
+          isActive
+        });
       }
     }
 
     // 2. Cards / interactive elements (including tags, award cards, project images, links, etc.)
-    liveCards = Array.from(document.querySelectorAll('.project-card, .project-image, .project-link, .tag, .award-card, .tab-navigation, #contact-me-section .button, #contact-me-section, .location-badge'))
+    const rawCards = Array.from(document.querySelectorAll('.project-card, .project-image, .project-link, .tag, .award-card, .tab-navigation, #contact-me-section .button, #contact-me-section, .location-badge'))
       .filter(isElementVisible);
+
+    liveCards = rawCards.map(card => {
+      const style = window.getComputedStyle(card);
+      const isContactSection = !!card.closest('#contact-me-section');
+      const isLocationBadge = card.classList.contains('location-badge') || card.classList.contains('location-icon-container');
+      const isButton = card.classList.contains('button');
+      
+      // Extract child SVGs and precompute their colors/cache
+      const svgs = Array.from(card.querySelectorAll('svg')).map(svg => {
+        const svgStyle = window.getComputedStyle(svg);
+        const parentStyleColor = style.color;
+        const svgColor = svgStyle.color || parentStyleColor;
+        return {
+          element: svg,
+          color: isContactSection && isButton ? 'rgb(120, 120, 120)' : svgColor
+        };
+      });
+
+      return {
+        element: card,
+        id: card.id,
+        bgColor: style.backgroundColor,
+        borderRadiusStr: style.borderRadius,
+        radii: parseBorderRadius(style.borderRadius),
+        borderWidth: parseFloat(style.borderWidth) || 0,
+        borderColor: style.borderColor,
+        borderLeftWidth: parseFloat(style.borderLeftWidth) || 0,
+        borderLeftColor: style.borderLeftColor,
+        isContactSection: isContactSection,
+        isLocationBadge: isLocationBadge,
+        isButton: isButton,
+        svgs: svgs
+      };
+    });
 
     // 3. Images
     liveImages = Array.from(document.querySelectorAll('img')).filter(img => {
@@ -396,8 +452,10 @@ const ASCII_CFG = {
     // Attach hover listeners to the entire document
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseleave', onLeave);
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
     document.addEventListener('touchmove', onTouchMove, { passive: true });
     document.addEventListener('touchend', onLeave);
+    document.addEventListener('touchcancel', onLeave);
     window.addEventListener('resize', onResize);
     
     // Throttled scroll listener
@@ -542,6 +600,15 @@ const ASCII_CFG = {
     FluidPhysics.pointerMoveHero(mouse.x, mouse.y);
   }
 
+  function onTouchStart(e) {
+    const t = e.touches[0];
+    if (!t) return;
+    mouse.x = t.clientX;
+    mouse.y = t.clientY;
+    mouseMoved = true;
+    FluidPhysics.pointerMoveHero(mouse.x, mouse.y);
+  }
+
   function onTouchMove(e) {
     const t = e.touches[0];
     if (!t) return;
@@ -668,10 +735,10 @@ const ASCII_CFG = {
 
     // 2b. Draw live cards/buttons dynamically
     liveCards.forEach(card => {
-      if (card.offsetWidth === 0 && card.offsetHeight === 0) return;
-      const r = card.getBoundingClientRect();
+      const el = card.element;
+      if (el.offsetWidth === 0 && el.offsetHeight === 0) return;
+      const r = el.getBoundingClientRect();
       if (r.bottom < 0 || r.top > H || r.right < 0 || r.left > W) return;
-      if (!isElementVisible(card)) return;
 
       activeCardRects.push({
         left: r.left,
@@ -680,18 +747,13 @@ const ASCII_CFG = {
         bottom: r.bottom
       });
 
-      const style = window.getComputedStyle(card);
-      const bgColor = style.backgroundColor;
-      const borderRadiusStr = style.borderRadius;
-      const radii = parseBorderRadius(borderRadiusStr);
-      const borderWidth = parseFloat(style.borderWidth) || 0;
-      let borderColor = style.borderColor;
-
-      const isContactSection = card.closest('#contact-me-section');
-      const isLocationBadge = card.classList.contains('location-badge') || card.classList.contains('location-icon-container');
+      const bgColor = card.bgColor;
+      const radii = card.radii;
+      const borderWidth = card.borderWidth;
+      let borderColor = card.borderColor;
 
       // Soften border color for contact section buttons
-      if (isContactSection && card.classList.contains('button')) {
+      if (card.isContactSection && card.isButton) {
         borderColor = 'rgb(100, 100, 100)';
       }
 
@@ -710,7 +772,7 @@ const ASCII_CFG = {
       }
 
       // Draw border with rounded corners (skip for location badge/icon to prevent random white borders)
-      if (!isLocationBadge && borderWidth > 0 && borderColor && borderColor !== 'rgba(0, 0, 0, 0)' && borderColor !== 'transparent') {
+      if (!card.isLocationBadge && borderWidth > 0 && borderColor && borderColor !== 'rgba(0, 0, 0, 0)' && borderColor !== 'transparent') {
         scratchCtx.strokeStyle = borderColor;
         scratchCtx.lineWidth = Math.max(4.5, borderWidth * 2.2);
         scratchCtx.beginPath();
@@ -723,12 +785,11 @@ const ASCII_CFG = {
       }
 
       // Special left border drawing logic (e.g. for .award-card which has border-left but borderWidth is reported as 0)
-      const borderLeftWidth = parseFloat(style.borderLeftWidth) || 0;
-      if (borderWidth === 0 && borderLeftWidth > 0) {
-        const borderLeftColor = style.borderLeftColor;
+      if (borderWidth === 0 && card.borderLeftWidth > 0) {
+        const borderLeftColor = card.borderLeftColor;
         if (borderLeftColor && borderLeftColor !== 'rgba(0, 0, 0, 0)' && borderLeftColor !== 'transparent') {
           scratchCtx.strokeStyle = borderLeftColor;
-          scratchCtx.lineWidth = Math.max(4.5, borderLeftWidth * 2.2);
+          scratchCtx.lineWidth = Math.max(4.5, card.borderLeftWidth * 2.2);
           scratchCtx.beginPath();
           scratchCtx.moveTo(r.left, r.top);
           scratchCtx.lineTo(r.left, r.bottom);
@@ -752,18 +813,12 @@ const ASCII_CFG = {
       scratchCtx.restore();
 
       // Render child SVGs (icons inside buttons) dynamically in the mask
-      const svgs = card.querySelectorAll('svg');
-      svgs.forEach(svg => {
-        const sr = svg.getBoundingClientRect();
+      card.svgs.forEach(svg => {
+        const sr = svg.element.getBoundingClientRect();
         if (sr.bottom < 0 || sr.top > H || sr.right < 0 || sr.left > W) return;
         if (sr.width === 0 || sr.height === 0) return;
 
-        const svgStyle = window.getComputedStyle(svg);
-        let svgColor = svgStyle.color || style.color;
-        if (isContactSection) {
-          svgColor = 'rgb(120, 120, 120)'; // Soft grey icons inside contact section
-        }
-        const cachedImg = getButtonSvgImage(svg, svgColor);
+        const cachedImg = getButtonSvgImage(svg.element, svg.color);
         if (cachedImg) {
           scratchCtx.save();
           scratchCtx.drawImage(cachedImg, sr.left, sr.top, sr.width, sr.height);
@@ -824,7 +879,7 @@ const ASCII_CFG = {
 
     // 2d. Draw live text nodes dynamically
     const range = document.createRange();
-    liveTextNodes.forEach(({ node, parent }) => {
+    liveTextNodes.forEach(({ node, parent, style, isInsideContact, isH2, isTabItem, isActive }) => {
       try {
         const val = node.nodeValue;
         const trimmed = val.trim();
@@ -842,14 +897,11 @@ const ASCII_CFG = {
         if (r.bottom < 0 || r.top > H || r.right < 0 || r.left > W) return;
         if (r.width === 0 || r.height === 0) return;
 
-        if (!isElementVisible(parent)) return;
-
-        const style = window.getComputedStyle(parent);
         let color = style.color;
         
         // Soften text colors inside contact section
-        if (parent.closest('#contact-me-section')) {
-          if (parent.tagName.toLowerCase() === 'h2') {
+        if (isInsideContact) {
+          if (isH2) {
             color = 'rgb(170, 170, 170)'; // Soft light grey for heading
           } else {
             color = 'rgb(130, 130, 130)'; // Soft grey for paragraph text
@@ -898,7 +950,7 @@ const ASCII_CFG = {
         }
 
         // Draw dotted underline for active tab item (replaces CSS ::after pseudo-element which canvas cannot read)
-        if (parent.classList.contains('tab-item') && parent.classList.contains('active')) {
+        if (isTabItem && isActive) {
           const pr = parent.getBoundingClientRect();
           const lineW = pr.width * 0.8;
           const lineX = pr.left + (pr.width - lineW) / 2;
