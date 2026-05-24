@@ -91,7 +91,7 @@
 
 @media (max-width: 750px) {
   .tab-navigation {
-    gap: 20px;
+    gap: 24px;
     flex-wrap: nowrap;
     justify-content: center;
     max-width: 100%;
@@ -99,28 +99,28 @@
   }
 
   .tab-item {
-    font-size: 1.3em;
+    font-size: 1.25em;
   }
 }
 
 @media (max-width: 450px) {
   .tab-navigation {
-    gap: 20px;
+    gap: 16px;
   }
 
   .tab-item {
-    font-size: 1.2em;
-    letter-spacing: 0.1em;
+    font-size: 1.05em;
+    letter-spacing: 0.08em;
   }
 }
 
 @media (max-width: 350px) {
   .tab-navigation {
-    gap: 15px;
+    gap: 10px;
   }
 
   .tab-item {
-    font-size: 1em;
-    letter-spacing: 0.08em;
+    font-size: 0.9em;
+    letter-spacing: 0.05em;
   }
 }
