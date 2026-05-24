@@ -1,0 +1,670 @@
+/* ==========================================================================
+   Project Detail Stylesheet - Raspberry Pi Homelab
+   Monochrome (black/white) & highly rounded ("circly") design philosophy.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABLES & SYSTEM DEFAULTS
+   ========================================================================== */
+:root {
+  /* Color Palette - Monochrome white, light grey, dark grey, black */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f6f6;
+  --bg-card: #f9f9f9;
+  
+  --accent-primary: #000000;
+  --accent-primary-hover: #333333;
+  --accent-light: #f1f1f1;
+
+  /* Borders & Dividers */
+  --border-light: #e5e5e5;
+  --border-active: #111111;
+  
+  /* Typography Colors */
+  --text-primary: #111111;
+  --text-secondary: #444444;
+  --text-muted: #777777;
+  
+  /* Fonts */
+  --font-display: 'Bitcount Single', 'Courier New', monospace, sans-serif;
+  --font-body: 'Montserrat', Arial, sans-serif;
+  
+  /* Layout */
+  --container-width: 1000px;
+}
+
+/* ==========================================================================
+   2. RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 50px; /* Circly */
+  border: 2px solid var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ==========================================================================
+   3. NAVIGATION BAR
+   ========================================================================== */
+.project-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 400;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 6px 16px;
+  border-radius: 50px; /* Circly */
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+}
+
+.back-link svg {
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+  color: #fff;
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.back-link:hover svg {
+  transform: translateX(-4px);
+}
+
+.nav-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   4. CONTENT LAYOUT & HERO
+   ========================================================================== */
+.project-content-wrapper {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 50px 24px 80px 24px;
+}
+
+.project-hero {
+  position: relative;
+  text-align: center;
+  padding: 40px 0 50px 0;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 4.2rem;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
+  color: var(--accent-primary);
+}
+
+.project-subtitle {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 30px auto;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   5. CARDS (CIRCLY MINIMALIST PANELS)
+   ========================================================================== */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px; /* Highly Rounded "Circly" */
+  padding: 35px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+}
+
+.section-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 18px 0;
+  color: var(--accent-primary);
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.section-card h2::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background-color: var(--accent-primary);
+}
+
+.section-card p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. LISTS & TYPOGRAPHY UTILITIES
+   ========================================================================== */
+.styled-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0 0;
+}
+
+.styled-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+}
+
+.styled-list li::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-primary);
+  border-radius: 50%; /* Circly bullet */
+}
+
+.styled-list li strong {
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.styled-list.compact li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.section-card a, .system-body a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--accent-primary);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.section-card a:hover, .system-body a:hover {
+  color: #555555;
+  border-bottom-color: #555555;
+}
+
+/* ==========================================================================
+   7. INFRASTRUCTURE & HARDWARE GRID
+   ========================================================================== */
+.infrastructure-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 35px;
+  margin-top: 24px;
+}
+
+.infra-block h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  color: var(--accent-primary);
+}
+
+.service-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  height: 100%;
+}
+
+.service-badge {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 50px; /* Highly Rounded "Circly" */
+  padding: 12px 22px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.005);
+}
+
+.service-badge:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   8. SYSTEMS SHOWCASE SECTION
+   ========================================================================== */
+.systems-showcase {
+  margin-bottom: 50px;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 35px 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.system-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 24px; /* Highly Rounded "Circly" */
+  margin-bottom: 35px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.system-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+}
+
+.system-header {
+  padding: 20px 28px;
+  background: #f1f1f1;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.system-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.system-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%; /* Circular Icons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+}
+
+.system-icon-title h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--accent-primary);
+}
+
+.system-tag {
+  font-size: 0.78rem;
+  font-weight: 400;
+  padding: 4px 14px;
+  border-radius: 50px; /* Highly Rounded "Circly" */
+  background: var(--accent-primary);
+  color: #ffffff;
+}
+
+/* System Body Two-Column Grid Setup */
+.system-body {
+  padding: 30px;
+  background: #ffffff;
+}
+
+.system-layout-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.system-body h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+  margin: 0 0 10px 0;
+}
+
+.system-info-block {
+  margin-bottom: 20px;
+}
+
+.system-info-block p {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.system-tech {
+  margin-bottom: 20px;
+}
+
+.system-features {
+  margin-bottom: 24px;
+}
+
+.feature-tags {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.feature-tags li {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  font-size: 0.85rem;
+  border-radius: 50px; /* Highly Rounded "Circly" */
+  font-weight: 400;
+}
+
+/* Challenges Solved component styling */
+.challenge-solved-box {
+  padding: 16px 20px;
+  border-radius: 16px; /* Rounded "Circly" corners */
+  margin-top: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-left: 5px solid var(--accent-primary); /* Monochrome dark left bar */
+}
+
+.challenge-solved-box h5 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-primary);
+}
+
+.challenge-solved-box p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* System Image Showcase Column styling */
+.system-image-col {
+  width: 100%;
+}
+
+.system-showcase-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px; /* Circly Rounded */
+  border: 1px solid var(--border-light);
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease;
+}
+
+.system-card:hover .system-showcase-img {
+  transform: scale(1.02);
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+  background: #f3f3f3;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+/* ==========================================================================
+   9. SKILLS SUMMARY
+   ========================================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  margin-top: 24px;
+}
+
+.skills-category h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   10. TECH STACK FOOTER
+   ========================================================================== */
+.detail-footer {
+  text-align: center;
+  padding: 35px 0 0 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.detail-footer h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+}
+
+.tech-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tech-tag {
+  background: var(--accent-primary);
+  color: #ffffff;
+  padding: 5px 16px;
+  border-radius: 50px; /* Highly Rounded "Circly" */
+  font-size: 0.8rem;
+  font-weight: 300;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.tech-tag:hover {
+  background-color: var(--accent-primary-hover);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .project-title {
+    font-size: 3.2rem;
+  }
+  
+  .infrastructure-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .system-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .system-image-col {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-content-wrapper {
+    padding: 30px 16px 60px 16px;
+  }
+
+  .project-hero {
+    padding: 20px 0 30px 0;
+  }
+
+  .project-title {
+    font-size: 2.6rem;
+  }
+
+  .project-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .section-card {
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .system-header {
+    padding: 16px 20px;
+  }
+
+  .system-body {
+    padding: 20px;
+  }
+
+  .system-icon-title h3 {
+    font-size: 1.1rem;
+  }
+
+  .section-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .section-heading {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-title {
+    font-size: 2.1rem;
+  }
+
+  .hero-links {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 20px;
+  }
+
+  .hero-btn {
+    justify-content: center;
+  }
+
+  .system-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .system-tag {
+    align-self: flex-start;
+  }
+}

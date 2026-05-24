@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Raspberry Pi Homelab - dedicated network storage, classic retro gaming console, and isolated security testing lab. Built by Samarth Agrawal.">
+  <title>Raspberry Pi Homelab - Samarth Agrawal</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css?v=1.0">
+  <link rel="stylesheet" href="css/project-detail.css?v=1.0">
+</head>
+<body>
+  <nav class="project-nav">
+    <div class="nav-container">
+      <a href="index.html#projects" class="back-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Portfolio
+      </a>
+      <span class="nav-title">Project Case Study</span>
+    </div>
+  </nav>
+
+  <main class="project-content-wrapper">
+    <!-- Hero Section -->
+    <header class="project-hero">
+      <div class="hero-glow"></div>
+      <h1 class="project-title">Raspberry Pi Homelab</h1>
+      <p class="project-subtitle">Building a multi-purpose infrastructure for learning, storage, and security research</p>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="section-card project-overview">
+      <h2>Overview</h2>
+      <p>A comprehensive homelab environment built entirely on Raspberry Pi hardware, showcasing diverse applications from network storage and media streaming to retro gaming and security research. Each component serves a specific purpose while demonstrating different aspects of systems administration and hardware integration.</p>
+    </section>
+
+    <!-- The Challenge Section -->
+    <section class="section-card project-challenge">
+      <h2>The Challenge</h2>
+      <p>Instead of purchasing expensive commercial solutions or running resource-heavy servers, I wanted to build a cost-effective, modular homelab that could:</p>
+      <ul class="styled-list">
+        <li>Provide centralized storage accessible from any device on the local network</li>
+        <li>Preserve classic gaming history without purchasing multiple expensive original consoles</li>
+        <li>Create a completely safe, segregated sandbox for learning practical network security</li>
+        <li>Run continuously 24/7 with minimal noise and extremely low power consumption</li>
+      </ul>
+    </section>
+
+    <!-- Infrastructure Overview Section -->
+    <section class="section-card project-infrastructure">
+      <h2>Infrastructure Overview</h2>
+      <div class="infrastructure-grid">
+        <div class="infra-block">
+          <h3>Hardware Foundation</h3>
+          <ul class="styled-list">
+            <li><strong>Multiple Raspberry Pi 4 boards</strong> (equipped with 4GB RAM each)</li>
+            <li><strong>Gigabit Network switch</strong> for local high-speed interconnection and VLAN segregation</li>
+            <li><strong>High-speed peripherals</strong> (external SSDs, wireless network cards, wireless controllers)</li>
+            <li><strong>Gigabit Ethernet backbone</strong> connecting primary devices for maximum data throughput</li>
+          </ul>
+        </div>
+        <div class="infra-block">
+          <h3>Core Services Running</h3>
+          <div class="service-badges">
+            <span class="service-badge">OMV NAS Server</span>
+            <span class="service-badge">RetroPie Emulator Console</span>
+            <span class="service-badge">Isolated Security Sandbox</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Systems Showcase Section -->
+    <section class="systems-showcase">
+      <h2 class="section-heading">Systems Breakdown</h2>
+      
+      <!-- System 1: NAS -->
+      <article class="system-card">
+        <div class="system-header">
+          <div class="system-icon-title">
+            <div class="system-icon">
+              <!-- Hard Drive / Storage Icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+            <h3>System 1: Network Attached Storage (NAS)</h3>
+          </div>
+          <span class="system-tag">Storage & Backups</span>
+        </div>
+        <div class="system-body">
+          <div class="system-layout-grid">
+            <div class="system-content-col">
+              <div class="system-info-block">
+                <h4>Purpose</h4>
+                <p>To establish centralized, secure file storage and robust media streaming accessible across all devices connected to the local network.</p>
+              </div>
+              
+              <div class="system-tech">
+                <h4>Technical Implementation</h4>
+                <ul class="styled-list compact">
+                  <li><strong>Storage Platform:</strong> 1TB Crucial High-Speed SSD</li>
+                  <li><strong>Operating System:</strong> Raspberry Pi OS running OpenMediaVault (OMV)</li>
+                  <li><strong>Protocols:</strong> Samba (SMB) for cross-platform devices, NFS for specialized Linux transfers</li>
+                  <li><strong>Primary Reference:</strong> <a href="https://www.youtube.com/watch?v=gyMpI8csWis" target="_blank" rel="noopener">NetworkChuck's OMV tutorial</a></li>
+                </ul>
+              </div>
+
+              <div class="system-features">
+                <h4>Key Features</h4>
+                <ul class="feature-tags">
+                  <li>OpenMediaVault browser-based dashboard management</li>
+                  <li>Multi-device access (Windows, macOS, Linux, and Mobile)</li>
+                  <li>Automated backup scripts using custom <code>rsync</code> configurations</li>
+                  <li>Lightweight local media streaming server</li>
+                </ul>
+              </div>
+
+              <div class="challenge-solved-box">
+                <h5><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Challenge Solved: External Power Limitations</h5>
+                <p>Initially, I connected a 1TB external HDD, but the mechanical drive failed to spin up reliably due to power supply fluctuations from the Pi's USB ports. I resolved this by migrating to a 1TB Crucial solid-state drive (SSD), which significantly lowered the power draw and yielded faster read/write speeds for network file transfers.</p>
+              </div>
+            </div>
+            <div class="system-image-col">
+              <img src="assets/photos/NAS.jpg" alt="NAS Server Setup" class="system-showcase-img">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- System 2: RetroPie -->
+      <article class="system-card">
+        <div class="system-header">
+          <div class="system-icon-title">
+            <div class="system-icon">
+              <!-- Gamepad Icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="3"></rect></svg>
+            </div>
+            <h3>System 2: RetroPi Gaming Console</h3>
+          </div>
+          <span class="system-tag">Emulation & Gaming</span>
+        </div>
+        <div class="system-body">
+          <div class="system-layout-grid">
+            <div class="system-content-col">
+              <div class="system-info-block">
+                <h4>Purpose</h4>
+                <p>A dedicated retro gaming emulation platform built to preserve and play console games spanning multiple generations.</p>
+              </div>
+
+              <div class="system-tech">
+                <h4>Technical Implementation</h4>
+                <ul class="styled-list compact">
+                  <li><strong>Software:</strong> RetroPie distribution paired with the EmulationStation graphical frontend</li>
+                  <li><strong>Emulators:</strong> Configured RetroArch emulation cores (NES, SNES, Genesis, N64, PSX)</li>
+                  <li><strong>Controllers:</strong> Wireless Sony DualShock 4 controllers synced via Bluetooth</li>
+                  <li><strong>Primary Reference:</strong> <a href="https://www.youtube.com/watch?v=AaseHnf0k2o" target="_blank" rel="noopener">NetworkChuck's RetroPie tutorial</a></li>
+                </ul>
+              </div>
+
+              <div class="system-features">
+                <h4>Key Features</h4>
+                <ul class="feature-tags">
+                  <li>Multi-system emulation support across 10+ classic consoles</li>
+                  <li>Beautiful, theme-supported UI displaying custom box art and metadata</li>
+                  <li>Global game save states and custom fast-forward commands</li>
+                  <li>Automatic controller discovery and pairing mapping</li>
+                </ul>
+              </div>
+
+              <div class="challenge-solved-box">
+                <h5><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Challenge Solved: Input Remapping & Configurations</h5>
+                <p>Several emulators lacked automatic mapping for controllers, forcing the system to rely on raw keyboard inputs. I mapped key layouts for each emulator manually, creating custom device controller mapping configs in the global RetroArch configuration file, eventually moving to full wireless gamepads.</p>
+              </div>
+            </div>
+            <div class="system-image-col">
+              <img src="assets/photos/retro_pi.png" alt="RetroPie Gaming Setup" class="system-showcase-img">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- System 3: Security Lab -->
+      <article class="system-card">
+        <div class="system-header">
+          <div class="system-icon-title">
+            <div class="system-icon">
+              <!-- Shield / Security Icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3>System 3: Network Security Lab</h3>
+          </div>
+          <span class="system-tag">Security & Networking</span>
+        </div>
+        <div class="system-body">
+          <div class="system-layout-grid">
+            <div class="system-content-col">
+              <div class="system-info-block">
+                <h4>Purpose</h4>
+                <p>An isolated virtualized security lab built for ethical hacking, vulnerability analysis, and network packet capture exercises. Instilled network fundamentals and network administration practices via hands-on training.</p>
+              </div>
+
+              <div class="system-tech">
+                <h4>Technical Implementation</h4>
+                <ul class="styled-list compact">
+                  <li><strong>Attacking Platform:</strong> Kali Linux ARM distribution running specialized testing tools</li>
+                  <li><strong>Targets:</strong> Intentionally vulnerable sandbox machines (DVWA, Metasploitable VMs)</li>
+                  <li><strong>Networking:</strong> Isolated local VLAN completely firewalled from production devices</li>
+                  <li><strong>Toolkit:</strong> <code>nmap</code>, <code>Wireshark</code>, Metasploit Framework, Burp Suite, Aircrack-ng</li>
+                  <li><strong>Primary Reference:</strong> <a href="https://www.youtube.com/watch?v=PqRVo2niA_8" target="_blank" rel="noopener">Kali Linux on Raspberry Pi tutorial</a></li>
+                </ul>
+              </div>
+
+              <div class="system-features">
+                <h4>Key Features & Completed Labs</h4>
+                <ul class="feature-tags">
+                  <li>ARP Spoofing attacks and network mapping mitigation labs</li>
+                  <li>SQL Injection (SQLi) and Cross-Site Scripting (XSS) exploiting on DVWA</li>
+                  <li>WiFi security auditing (capturing and analyzing WPA2 handshakes)</li>
+                  <li>Broad system scanning, packet analysis, and threat modeling</li>
+                </ul>
+              </div>
+
+              <div class="challenge-solved-box">
+                <h5><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Challenge Solved: Sandboxed VLAN Segregation</h5>
+                <p>Ensuring attacking scripts did not bleed into the home production network required a custom router firewall configuration. I configured a dual-NIC network topology, routing isolated lab environments through separate VLAN subnets and enforcing strict iptables packet rules.</p>
+              </div>
+            </div>
+            <div class="system-image-col">
+              <img src="assets/photos/kali_linux.png" alt="Kali Linux Security Lab" class="system-showcase-img">
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section-card project-skills">
+      <h2>Skills Acquired</h2>
+      <div class="skills-grid">
+        <div class="skills-category">
+          <h3>Technical Skills</h3>
+          <ul class="styled-list compact">
+            <li><strong>Linux Systems Administration:</strong> systemd service scripts, user rights administration, config maintenance</li>
+            <li><strong>Networking Fundamentals:</strong> IP Routing, packet sniffing, protocol inspection, SMB/NFS routing</li>
+            <li><strong>Hardware Debugging:</strong> power requirement analysis, hardware selection, active and passive cooling</li>
+            <li><strong>Security Principles:</strong> defensive security auditing, penetration methodologies, cryptographic hash analysis</li>
+          </ul>
+        </div>
+        <div class="skills-category">
+          <h3>Soft Skills</h3>
+          <ul class="styled-list compact">
+            <li>Reviewing extensive documentation and adapting systems to specific hardware targets</li>
+            <li>Troubleshooting unique hardware and configuration quirks through technical forums</li>
+            <li>System architecture planning, staging, and modular project assembly</li>
+            <li>Documentation drafting and project auditing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Expansion -->
+    <section class="section-card future-expansion">
+      <h2>Future Expansions</h2>
+      <ul class="styled-list">
+        <li><strong>Pi-hole integration:</strong> deploy network-wide DNS blacklisting for ad blocking</li>
+        <li><strong>Home automation central:</strong> install Home Assistant to manage smart devices</li>
+        <li><strong>VPN Gateway:</strong> establish a secure WireGuard VPN tunnel for remote storage access</li>
+        <li><strong>Docker:</strong> dockerize services to optimize resources and deployment consistency</li>
+      </ul>
+    </section>
+
+    <!-- Tech Stack footer -->
+    <footer class="detail-footer">
+      <h2>Technologies Utilized</h2>
+      <div class="tech-tags-container">
+        <span class="tech-tag">Raspberry Pi 4</span>
+        <span class="tech-tag">Raspberry Pi OS</span>
+        <span class="tech-tag">OpenMediaVault</span>
+        <span class="tech-tag">RetroPie</span>
+        <span class="tech-tag">Kali Linux</span>
+        <span class="tech-tag">Samba</span>
+        <span class="tech-tag">NFS</span>
+        <span class="tech-tag">RetroArch</span>
+        <span class="tech-tag">EmulationStation</span>
+        <span class="tech-tag">Wireshark</span>
+        <span class="tech-tag">Metasploit</span>
+        <span class="tech-tag">nmap</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">bash scripting</span>
+        <span class="tech-tag">systemd</span>
+        <span class="tech-tag">iptables</span>
+        <span class="tech-tag">VLAN routing</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

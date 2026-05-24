@@ -36,6 +36,7 @@ An interactive, immersive static portfolio website featuring portfolio photograp
 ```
 me-main/
 ├── css/
+│   ├── project-detail.css   # Monochrome & "circly" light-theme for project detail pages
 │   └── style.css            # Layout grids, lightboxes, animations, responsive breakpoints
 ├── fonts/
 │   ├── BitcountSingle-Regular.woff2  # Self-hosted monospace typography for scrolling titles
@@ -51,6 +52,8 @@ me-main/
 ├── portrait.png             # Main portrait high-res texture
 ├── logo.png                 # Logo (PNG format)
 ├── logo.svg                 # Logo (vector format)
+├── design.md                # Grayscale & circly light-theme design system guide
+├── homelab.html             # Dedicated Raspberry Pi Homelab project case study page
 ├── index.html               # Semantic HTML layout and DOM structure
 └── README.md                # Project documentation
 ```

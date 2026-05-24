@@ -11,7 +11,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
   justify-content: center;
   gap: 32px;
-  max-width: 1200px;
+  max-width: 1250px;
   margin: 0 auto;
 }
 
@@ -151,5 +151,53 @@
   .project-link {
     padding: 8px 12px;
     font-size: 0.85rem;
+  }
+}
+
+/* ===========================
+   HOMELAB CAROUSEL ANIMATION
+   =========================== */
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+.carousel-track {
+  display: flex;
+  width: 400%; /* 4 images total (each is 100% of container width) */
+  height: 100%;
+  animation: homelab-carousel 9s infinite;
+}
+
+.carousel-track img {
+  width: 25% !important; /* Each image takes exactly 1/4 of track width */
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+@keyframes homelab-carousel {
+  /* Image 1: NAS Setup */
+  0%, 28% {
+    transform: translateX(0%);
+  }
+  /* Slide to Image 2 */
+  33%, 61% {
+    transform: translateX(-25%);
+  }
+  /* Slide to Image 3 */
+  66%, 94% {
+    transform: translateX(-50%);
+  }
+  /* Slide to Image 1 (duplicate at the end) */
+  99%, 100% {
+    transform: translateX(-75%);
+  }
+}
+
+@media (max-width: 750px) {
+  .carousel-container {
+    height: 180px;
   }
 }
