@@ -9,6 +9,7 @@ class TextScramble {
     this.el = el;
     this.chars = options.chars || '!<>-_\\/[]{}—=+*^?#@%&$';
     this.update = this.update.bind(this);
+    this.isResolving = false; // Flag to check when to start resolving target letters
   }
 
   setText(newText) {
@@ -21,14 +22,20 @@ class TextScramble {
       const from = oldText[i] || '';
       const to = newText[i] || '';
       const start = 0;
-      const end = Math.floor(Math.random() * 15) + 10; // Fast scramble (10-25 frames)
+      // Letters resolve over 15 to 30 frames once resolution is triggered
+      const end = Math.floor(Math.random() * 15) + 15;
       this.queue.push({ from, to, start, end });
     }
     
     cancelAnimationFrame(this.frameRequest);
     this.frame = 0;
+    this.isResolving = false;
     this.update();
     return promise;
+  }
+
+  reveal() {
+    this.isResolving = true;
   }
 
   update() {
@@ -38,27 +45,28 @@ class TextScramble {
     for (let i = 0, n = this.queue.length; i < n; i++) {
       let { from, to, start, end, char } = this.queue[i];
       
-      if (this.frame >= end) {
+      if (this.isResolving && this.frame >= end) {
         complete++;
         output += to;
-      } else if (this.frame >= start) {
+      } else {
+        // Scrambling phase - display random characters at low opacity
         if (!char || Math.random() < 0.28) {
           char = this.randomChar();
           this.queue[i].char = char;
         }
         output += `<span style="opacity: 0.4">${char}</span>`;
-      } else {
-        output += from;
       }
     }
     
     this.el.innerHTML = output;
     
-    if (complete === this.queue.length) {
+    if (this.isResolving && complete === this.queue.length) {
       this.resolve();
     } else {
       this.frameRequest = requestAnimationFrame(this.update);
-      this.frame++;
+      if (this.isResolving) {
+        this.frame++;
+      }
     }
   }
 
@@ -103,33 +111,63 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateScrollOffset);
 
   const startScramble = () => {
-    // Re-calculate start offset now that custom fonts are active
-    updateScrollOffset();
+    // Start continuous scrambling immediately
+    const scramblePromise = scramble.setText(targetText);
     
-    // Brief initial delay before scramble begins (fast timestamp)
-    setTimeout(() => {
-      scramble.setText(targetText).then(() => {
-        // Once scramble is complete, hold for 300ms then fade out the screen and fade in the content
-        setTimeout(() => {
-          updateScrollOffset(); // Final check before fade
-          screen.classList.add('fade-out');
-          document.body.classList.add('loaded');
-          
-          // Restore scroll locks
-          document.body.style.overflow = '';
-          document.removeEventListener('touchmove', preventScroll);
-          document.removeEventListener('wheel', preventScroll);
-          
-          // Trigger a resize event to ensure canvas and parallax elements layout correctly
-          window.dispatchEvent(new Event('resize'));
+    // 1. Minimum animation display time of 1200ms for a premium transition feel
+    const minTimePromise = new Promise((resolve) => setTimeout(resolve, 1200));
+    
+    // 2. Wait for window load event (all images, stylesheets, and assets fully loaded)
+    const windowLoadPromise = new Promise((resolve) => {
+      if (document.readyState === 'complete') {
+        resolve();
+      } else {
+        window.addEventListener('load', resolve);
+      }
+    });
 
-          // Wait for 400ms fade transition to complete, then lower z-index of scrolling text
-          setTimeout(() => {
-            document.body.classList.add('loader-finished');
-          }, 400);
-        }, 300);
-      });
-    }, 250);
+    // 3. Wait for Three.js WebGL rendering/displacement grid initialization
+    const threeReadyPromise = new Promise((resolve) => {
+      if (window.threeReady) {
+        resolve();
+      } else {
+        window.addEventListener('three-ready', resolve);
+      }
+    });
+
+    // 4. Safety fallback timeout of 3.5 seconds to prevent getting stuck
+    const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 3500));
+
+    // Combine loading promises
+    const assetsReadyPromise = Promise.all([minTimePromise, windowLoadPromise, threeReadyPromise]);
+
+    // Trigger resolution when assets are ready, or upon safety timeout
+    Promise.race([assetsReadyPromise, safetyTimeoutPromise]).then(() => {
+      updateScrollOffset();
+      scramble.reveal();
+    });
+
+    scramblePromise.then(() => {
+      // Once scramble is complete, hold for 300ms then fade out screen and reveal content
+      setTimeout(() => {
+        updateScrollOffset(); // Final check before fade
+        screen.classList.add('fade-out');
+        document.body.classList.add('loaded');
+        
+        // Restore scroll locks
+        document.body.style.overflow = '';
+        document.removeEventListener('touchmove', preventScroll);
+        document.removeEventListener('wheel', preventScroll);
+        
+        // Trigger a resize event to ensure Three.js canvas and other layouts calculate coordinates properly
+        window.dispatchEvent(new Event('resize'));
+
+        // Wait for 400ms fade transition to complete, then lower z-index of scrolling text
+        setTimeout(() => {
+          document.body.classList.add('loader-finished');
+        }, 400);
+      }, 300);
+    });
   };
 
   let scrambleStarted = false;
@@ -139,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startScramble();
   };
 
-  // Wait for fonts (Bitcount Single) to load so that the scrambling looks correct from the start
+  // Wait for fonts (Bitcount Single) to load so that scrambling starts with the correct geometry
   if (document.fonts) {
     document.fonts.ready.then(triggerStart);
   }
@@ -147,6 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fallback trigger on window load
   window.addEventListener('load', triggerStart);
   
-  // Safety fallback timeout of 2.5 seconds
+  // Safety fallback timeout to trigger scrambling start
   setTimeout(triggerStart, 2500);
 });

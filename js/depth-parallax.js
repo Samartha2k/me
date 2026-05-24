@@ -153,6 +153,9 @@ const PARALLAX = {
         sizeRenderer();
         buildMesh();
         animate();
+        
+        window.threeReady = true;
+        window.dispatchEvent(new Event('three-ready'));
       });
     }
 
