@@ -674,6 +674,11 @@ const ASCII_CFG = {
   function loop() {
     requestAnimationFrame(loop);
 
+    // Disable pixel conversion (ASCII hover overlay) while loading screen is active
+    if (!document.body.classList.contains('loaded')) {
+      return;
+    }
+
     const ctx = overlayCtx;
     const W = overlayCanvas.width;
     const H = overlayCanvas.height;
