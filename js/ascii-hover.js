@@ -741,8 +741,8 @@ const ASCII_CFG = {
         scratchCtx.strokeStyle = 'rgb(80, 80, 80)';
         scratchCtx.lineWidth = 6;
         scratchCtx.beginPath();
-        if (scratchCtx.roundRect && borderRadius > 0) {
-          scratchCtx.roundRect(r.left, r.top, r.width, r.height, borderRadius);
+        if (scratchCtx.roundRect && radii) {
+          scratchCtx.roundRect(r.left, r.top, r.width, r.height, radii);
         } else {
           scratchCtx.rect(r.left, r.top, r.width, r.height);
         }
