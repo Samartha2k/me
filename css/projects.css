@@ -170,11 +170,17 @@
   height: 100%;
   animation: homelab-carousel 9s infinite;
 }
+.carousel-slide {
+  width: 25%;
+  height: 100%;
+  overflow: hidden;
+}
 
-.carousel-track img {
-  width: 25% !important; /* Each image takes exactly 1/4 of track width */
+.carousel-slide img {
+  width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  transition: transform 0.4s ease;
 }
 
 @keyframes homelab-carousel {
