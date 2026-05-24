@@ -113,12 +113,14 @@ window.FluidPhysics = (function () {
     if (elapsed > 100) elapsed = 100;
 
     // Scaling Logic: Shrink cursor blob by 2.0x when hovering below the hero landing page section
-    let targetScale = 1.0;
+    // and apply an additional 2.0x shrink factor on mobile devices
+    const isMobile = (window.innerWidth || 1) <= 750;
+    let targetScale = isMobile ? 0.5 : 1.0;
     const hero = document.getElementById('hero-section');
     if (hero) {
       const heroRect = hero.getBoundingClientRect();
       if (targetY > heroRect.bottom) {
-        targetScale = 0.5; // 2x shrink factor
+        targetScale = isMobile ? 0.25 : 0.5; // 2x shrink factor below hero
       }
     }
     // Interpolate scale transitions smoothly using exponent mapping

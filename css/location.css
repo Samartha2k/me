@@ -55,8 +55,8 @@
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(23.5deg);
-  width: 48px;
-  height: 48px;
+  width: 100% !important;
+  height: 100% !important;
   display: block;
   object-fit: contain;
 }
@@ -80,10 +80,5 @@
     width: 41px;
     height: 41px;
     border-width: 1px;
-  }
-
-  .location-icon-container img {
-    width: 34px;
-    height: 34px;
   }
 }

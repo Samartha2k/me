@@ -25,6 +25,8 @@ const PARALLAX = {
   lerpSpeed: 0.055,        // Linear interpolation speed for rotation smoothing (0 = frozen, 1 = instant)
   offsetX: 12,             // Lateral offset adjustments in Three units (+ = right, - = left)
   offsetY: -7,             // Vertical offset adjustments in Three units (+ = up, - = down)
+  mobileOffsetX: 0,        // Mobile X axis offset (+ = right, - = left)
+  mobileOffsetY: -5,       // Mobile Y axis offset (+ = up, - = down)
 };
 
 (function () {
@@ -222,9 +224,10 @@ const PARALLAX = {
       metalness: 0.1,
     });
 
+    const isMobile = window.innerWidth <= 750;
     mesh = new THREE.Mesh(geo, mat);
-    mesh.position.x = PARALLAX.offsetX;
-    mesh.position.y = PARALLAX.offsetY;
+    mesh.position.x = isMobile ? PARALLAX.mobileOffsetX : PARALLAX.offsetX;
+    mesh.position.y = isMobile ? PARALLAX.mobileOffsetY : PARALLAX.offsetY;
     scene.add(mesh);
   }
 
@@ -237,6 +240,12 @@ const PARALLAX = {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
+
+    if (mesh) {
+      const isMobile = window.innerWidth <= 750;
+      mesh.position.x = isMobile ? PARALLAX.mobileOffsetX : PARALLAX.offsetX;
+      mesh.position.y = isMobile ? PARALLAX.mobileOffsetY : PARALLAX.offsetY;
+    }
   }
 
   function onResize() { sizeRenderer(); }
