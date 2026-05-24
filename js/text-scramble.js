@@ -175,6 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const triggerStart = () => {
     if (scrambleStarted) return;
     scrambleStarted = true;
+    
+    // Smoothly reveal the text wrapper now that the custom font is ready
+    const wrapper = document.querySelector('.scrolling-text-wrapper');
+    if (wrapper) {
+      wrapper.style.opacity = '1';
+    }
+    
     startScramble();
   };
 
