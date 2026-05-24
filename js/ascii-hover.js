@@ -566,10 +566,8 @@ const ASCII_CFG = {
     scratchCanvas.width  = window.innerWidth;
     scratchCanvas.height = window.innerHeight;
     
-    const isMobile = window.innerWidth <= 750;
-    const currentFontSize = isMobile ? (ASCII_CFG.fontSize / 2) : ASCII_CFG.fontSize;
-    const cellW = currentFontSize * 0.72;
-    const cellH = currentFontSize * 0.72;
+    const cellW = ASCII_CFG.fontSize * 0.72;
+    const cellH = ASCII_CFG.fontSize * 0.72;
     const targetW = Math.max(1, Math.round(window.innerWidth / cellW));
     const targetH = Math.max(1, Math.round(window.innerHeight / cellH));
 
@@ -626,10 +624,8 @@ const ASCII_CFG = {
 
     FluidPhysics.prepareDensityReadback();
 
-    const isMobile = window.innerWidth <= 750;
-    const currentFontSize = isMobile ? (ASCII_CFG.fontSize / 2) : ASCII_CFG.fontSize;
-    const cellW = currentFontSize * 0.72;
-    const cellH = currentFontSize * 0.72;
+    const cellW = ASCII_CFG.fontSize * 0.72;
+    const cellH = ASCII_CFG.fontSize * 0.72;
     const bounds = getFluidDrawBounds(W, H, cellW, cellH);
     if (!bounds) return;
 
