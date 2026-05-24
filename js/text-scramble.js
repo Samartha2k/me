@@ -145,6 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
         screen.classList.add('fade-out');
         document.body.classList.add('loaded');
         
+        // Initialize Three.js WebGL canvas and build mesh right as the fade-out starts
+        if (typeof window.initDepthParallax === 'function') {
+          window.initDepthParallax();
+        }
+        
         // Restore scroll locks
         document.body.style.overflow = '';
         document.removeEventListener('touchmove', preventScroll);
@@ -156,11 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Wait for 400ms fade transition to complete, then lower z-index of scrolling text
         setTimeout(() => {
           document.body.classList.add('loader-finished');
-          
-          // Initialize Three.js WebGL canvas and build mesh now that loader is fully finished
-          if (typeof window.initDepthParallax === 'function') {
-            window.initDepthParallax();
-          }
         }, 400);
       }, 300);
     });

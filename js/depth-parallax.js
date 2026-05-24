@@ -38,6 +38,8 @@ const PARALLAX = {
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
   // DOM Containers
   let container, hero;
+  // Reveal animation progress (for dynamic 3D depth emergence)
+  let revealProgress = 0;
 
   /**
    * Initializes the Three.js WebGL canvas, lighting, camera, and hooks up event listeners.
@@ -221,17 +223,24 @@ const PARALLAX = {
     geo.attributes.position.needsUpdate = true;
     geo.computeVertexNormals();
 
-    // Create material with standard shading properties
+    // Create material with standard shading properties (transparent to fade in smoothly in WebGL)
     const mat = new THREE.MeshStandardMaterial({
       map: origTexture,
       roughness: 0.8,
       metalness: 0.1,
+      transparent: true,
+      opacity: 0.0,
     });
 
     const isMobile = window.innerWidth <= 750;
     mesh = new THREE.Mesh(geo, mat);
     mesh.position.x = isMobile ? PARALLAX.mobileOffsetX : PARALLAX.offsetX;
     mesh.position.y = isMobile ? PARALLAX.mobileOffsetY : PARALLAX.offsetY;
+    
+    // Start the mesh flat and scaled down in Z space, then animate it to full size/depth in loop
+    mesh.scale.set(0.9, 0.9, 0.0);
+    revealProgress = 0;
+    
     scene.add(mesh);
   }
 
@@ -261,6 +270,20 @@ const PARALLAX = {
   function animate() {
     requestAnimationFrame(animate);
     if (!mesh) return;
+    
+    // Smooth cubic ease-out reveal animation for 3D depth and scale
+    if (revealProgress < 1.0) {
+      revealProgress += 0.02; // Over ~50 frames (~800ms)
+      if (revealProgress > 1.0) revealProgress = 1.0;
+      
+      const easeProgress = 1 - Math.pow(1 - revealProgress, 3); // cubic ease out
+      mesh.scale.x = 0.9 + easeProgress * 0.1;
+      mesh.scale.y = 0.9 + easeProgress * 0.1;
+      mesh.scale.z = easeProgress;
+      
+      // Animate material opacity in WebGL directly (much faster than CSS filters)
+      mesh.material.opacity = easeProgress;
+    }
 
     // Linear interpolation for smooth trailing camera behavior
     mouse.x += (mouse.targetX - mouse.x) * PARALLAX.lerpSpeed;

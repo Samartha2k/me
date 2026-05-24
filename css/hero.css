@@ -89,7 +89,7 @@ body.loaded .scrolling-text h1 {
   pointer-events: none;
   z-index: 4;
   opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1);
   overflow: hidden;
 }
 

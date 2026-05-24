@@ -193,21 +193,28 @@ function randomizeDefaultTab() {
     return;
   }
 
-  if (Math.random() < 0.5) {
-    const tabItems = document.querySelectorAll('.tab-item');
-    const tabContents = document.querySelectorAll('.tab-content');
+  const rand = Math.random();
+  const tabItems = document.querySelectorAll('.tab-item');
+  const tabContents = document.querySelectorAll('.tab-content');
 
-    // Clear active states
-    tabItems.forEach(t => t.classList.remove('active'));
-    tabContents.forEach(c => c.classList.remove('active'));
+  // Clear active states
+  tabItems.forEach(t => t.classList.remove('active'));
+  tabContents.forEach(c => c.classList.remove('active'));
 
-    // Activate Projects tab
-    const projectsTab = Array.from(tabItems).find(t => t.dataset.tab === 'projects');
-    if (projectsTab) projectsTab.classList.add('active');
+  let targetTab = 'photography'; // default fallback
 
-    const projectsContent = document.querySelector('[data-content="projects"]');
-    if (projectsContent) projectsContent.classList.add('active');
+  if (rand < 0.70) {
+    targetTab = 'photography'; // 70% chance
+  } else {
+    targetTab = 'projects';    // 30% chance
   }
+
+  // Activate the chosen tab
+  const chosenTab = Array.from(tabItems).find(t => t.dataset.tab === targetTab);
+  if (chosenTab) chosenTab.classList.add('active');
+
+  const chosenContent = document.querySelector(`[data-content="${targetTab}"]`);
+  if (chosenContent) chosenContent.classList.add('active');
 }
 
 // ==========================================
